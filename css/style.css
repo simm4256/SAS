@@ -1,0 +1,70 @@
+.img{tmp:expression(setPng24(this));width:100%;height: 100%}
+.st_txtCenter{display:table-cell;vertical-align: middle;text-align: center;}
+
+.st_mainLayer{width:98vw;height:123vw;max-height: 98vh;max-width: 78.08vh; position: absolute;margin:auto;top:0;bottom:0;left:0;right:0;}
+.st_sas{width:70%;height: 43.66%; position: absolute;left:15%;top:22%;}
+.st_playButton{cursor:pointer;width:30%;height:8.774%;position: absolute;left:35%;top:67%;}
+.st_select1{cursor:pointer;width:23%; height:25.134%;position: absolute;left:1%;top:25%;}
+.st_select2{cursor:pointer;width:23%; height:25.134%;position: absolute;left:26%;top:25%;}
+.st_select3{cursor:pointer;width:23%; height:25.134%;position: absolute;left:51%;top:25%;}
+.st_select4{cursor:pointer;width:23%; height:25.134%;position: absolute;left:76%;top:25%;}
+.st_selectText{width:90%;height:15.6%;position: absolute;left:5%;top:60%;}
+.st_mySelect{width:8%;height:4.32%;position: absolute;left:9%;top:51%;}
+.st_enemySelect{width:8%;height:4.32%;position: absolute;left:9%;top:20%;}
+.st_offense{cursor:pointer;width:30%;height:10%;position: absolute;left:10%;top:63%;}
+.st_defense{cursor:pointer;width:30%;height:10%;position: absolute;left:60%;top:63%;}
+.st_wait{width:90%;height:15.9%;position: absolute;left:5%;top:40%;}
+
+.st_reset{width:90%;height:30%;position: absolute;left:5%;top:40%;}
+.st_textEnemy{width:10%;height:3%;position: absolute;left:20%;top:7%;}
+.st_textYou{width:10%;height:3%;position: absolute;left:70%;top:7%;}
+.st_enemyHp{width:10%;height:4%;position: absolute;left:17%;top:10.5%;}
+.st_myHp{width:10%;height:4%;position: absolute;left:67%;top:10.5%;}
+.st_enemyHeart{width:4.5%;height: 3%;position: absolute;left:27%;top:11.5%;}
+.st_myHeart{width:4.5%;height: 3%;position: absolute;left:77%;top:11.5%;}
+.st_round{width:10%;height:4%;position: absolute;left:45%;top:10.5%;}
+.st_enemyNum{width:8%;height:9.92%;position: absolute;left:12%;top:18%;}
+.st_enemyEquip{width:8%;height:9.92%;position: absolute;left:29%;top:18%;}
+.st_enemyItem{width:8%;height:9.92%;position: absolute;left:20.5%;top:18%;}
+.st_myNum{width:8%;height:9.92%;position: absolute;left:62%;top:18%;}
+.st_myEquip{width:8%;height:9.92%;position: absolute;left:79%;top:18%;}
+.st_myItem{width:8%;height:9.92%;position: absolute;left:70.5%;top:18%;}
+.st_offdef{width:13%;height:6%;position: absolute;left:43.5%;top:19%;}
+.st_announcer{width:94%;height:5%;position: absolute;left:3%;top:33%;}
+.st_announcer2{width:94%;height:5%;position: absolute;left:3%;top:39%;}
+.st_center{width:23%;height:25.134%;position: absolute;left:38.5%;top:43%;}
+.st_sword{width:13.8%;height: 15.1%;position: absolute;left:14%;top:46%;}
+.st_shield{width:13.8%;height: 15.1%;position: absolute;left:72.2%;top:46%;}
+.st_swordNum{width:10%;height:4%;position: absolute;left:15.9%;top:62%;}
+.st_shieldNum{width:10%;height:4%;position: absolute;left:74.1%;top:62%;}
+.st_have1{width:15%;height:16.67%;position: absolute;left:6%;top:73%;}
+.st_have2{width:15%;height:16.67%;position: absolute;left:23%;top:73%;}
+.st_have3{width:15%;height:16.67%;position: absolute;left:40%;top:73%;}
+.st_have4{width:15%;height:16.67%;position: absolute;left:57%;top:73%;}
+.st_draw{width:15%;height:16.67%;position: absolute;left:78%;top:73%;}
+.st_plus{width:3%;height: 3%;position: absolute;left:73.5%;top:80%;}
+
+.st_resEnemyNum{width:23%;height: 25.134%;position: absolute;left:9.5%;top:30%;}
+.st_resEnemyEquip{width:23%;height: 25.134%;position: absolute;left:67.5%;top:30%;}
+.st_resEnemyItem{width:23%;height: 25.134%;position: absolute;left:38.5%;top:30%;}
+.st_resMyNum{width:23%;height: 25.134%;position: absolute;left:9.5%;top:64%;}
+.st_resMyEquip{width:23%;height: 25.134%;position: absolute;left:67.5%;top:64%;}
+.st_resMyItem{width:23%;height: 25.134%;position: absolute;left:38.5%;top:64%;}
+.st_resAnnouncer{width:90%;height:5%;position: absolute;left:5%;top:56.7%}
+
+.st_resEnemyDown{width:10%;height:4%;position: absolute;left:18.5%;top:16.8%;}
+.st_resMyDown{width:10%;height:4%;position: absolute;left:68.5%;top:16.8%;}
+.st_resEnemyHeart{width:3%;height: 2.5%;position: absolute;left:26%;top:17.5%;}
+.st_resMyHeart{width:3%;height: 2.5%;position: absolute;left:76%;top:17.5%;}
+
+.st_itemView{width:70%;height: 76.5%;position: absolute;left:15%;top:3%;}
+.st_itemSelect1{cursor:pointer;width:16%;height: 18.67%;position: absolute;left:15%;top:80%;}
+.st_itemSelect2{cursor:pointer;width:16%;height: 18.67%;position: absolute;left:34%;top:80%;}
+.st_itemSelect3{cursor:pointer;width:16%;height: 18.67%;position: absolute;left:53%;top:80%;}
+.st_itemSelect4{cursor:pointer;width:16%;height: 18.67%;position: absolute;left:72%;top:80%;}
+.st_itemChoise{cursor:pointer;width:25%;height:13.5%;position: absolute;left:20%;top:83%;}
+.st_itemCancel{cursor:pointer;width:25%;height:13.5%;position: absolute;left:55%;top:83%;}
+
+.st_useText{display:table;width:90%;height:5%;position: absolute;left:5%;top:70%;}
+.st_useCount1{display:table;width:70%;height: 76.5%;position: absolute;left:15%;top:7%;}
+.st_useCount2{display:table;width:12%;height:10%;position: absolute;left:86%;top:30%;}

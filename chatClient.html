@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>채팅</title>
+    <style>
+      .chat_log{width: 95%; height: 200px}
+      .name{width:10%;}
+      .message{width:70%;}
+      .chat{width:10%;}
+      .changeName{width:20%}
+    </style>
+  </head>
+  <body>
+    <div>
+      <textarea id="chatLog" class="chat_log" readonly></textarea>
+    </div>
+    <form id="chat">
+      <input id="name" class="name" type="text">
+      <input id="message" class="message" type="text">
+      <input type="submit" class="chat" value="확인"/>
+      <br>
+    </form>
+    <form id="change">
+      <input type="text" id="changeName" class="changeName" value="바꿀 닉네임">
+      <input type="submit" class="chat" value="확인"/>
+    </form>
+    <div id="box" class="box">
+    <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+    <script src = "http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script>
+      var socket = io();
+      $('#chat').on('submit',function(e){
+        socket.emit('send message',$('#name').val(), $('#message').val());
+        $('#message').val("");
+        e.preventDefault();
+      });
+      socket.on('receive message',function(msg){
+        $('#chatLog').append(msg+"\n");
+        $('#chatLog').scrollTop($('#chatLog').innerHeight())
+      });
+      socket.on('give name',function(name){
+        $('#name').val(name);
+      });
+      $('#change').on('submit',function(e){
+        socket.emit('change name',$('#changeName').val(), $('#name').val());
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>

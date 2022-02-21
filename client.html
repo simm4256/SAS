@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sword and Shield</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+  </head>
+
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+  <body>
+    <div id='div_mainLayer' class='st_mainLayer'>
+      <div id='div_frontLayer' class='st_mainLayer'>
+        <div id='div_sas' class='st_sas'><img class='img' src='/image/sas(bg-invisible).png'></div>
+        <div id='div_playButton' class='st_playButton'><img class='img' src='/image/playButton.png'></div>
+      </div>
+      <div id='div_wait' class='st_wait'><img class='img' src='/image/searching.png'></div>
+      <div id='div_itemSelectLayer' class='st_mainLayer'>
+        <div id='div_itemView' class='st_itemView'><img id='img_itemView' class='img' src='/image/item_select.png'></div>
+        <div id='div_itemSelect1' class='st_itemSelect1'><img class='img' src='/image/item_logo_heal.png'></div>
+        <div id='div_itemSelect2' class='st_itemSelect2'><img class='img' src='/image/item_logo_plus.png'></div>
+        <div id='div_itemSelect3' class='st_itemSelect3'><img class='img' src='/image/item_logo_minus.png'></div>
+
+        <div id='div_itemChoise'class='st_itemChoise'><img class='img' src='/image/item_choise.png'></div>
+        <div id='div_itemCancel'class='st_itemCancel'><img class='img' src='/image/item_cancel.png'></div>
+      </div>
+      <div id='div_selectLayer' class='st_mainLayer'>
+        <div id='div_select1' class='st_select1'><img id='img_select1'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_select2' class='st_select2'><img id='img_select2'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_select3' class='st_select3'><img id='img_select3'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_select4' class='st_select4'><img id='img_select4'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_selected1' class='st_select1'><img id='img_selected1'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_selected2' class='st_select2'><img id='img_selected2'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_selected3' class='st_select3'><img id='img_selected3'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_selected4' class='st_select4'><img id='img_selected4'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_mySelect' class='st_mySelect'><img class='img' src='/image/you_seletlogo.png'></div>
+        <div id='div_enemySelect' class='st_enemySelect'><img class='img' src='/image/enemy_seletlogo.png'></div>
+        <div id='div_selectText' class='st_selectText'><img id='img_selectText' class='img' src='/image/please_select.png'></div>
+        <div id='div_offense' class='st_offense'><img class='img' src='/image/offense.png'></div>
+        <div id='div_defense' class='st_defense'><img class='img' src='/image/defense.png'></div>
+      </div>
+      <div id='div_statusLayer' class='st_mainLayer'>
+        <center>
+        <div id='div_round' class='st_round'>1R</div>
+        <div id='div_offdef' class='st_offdef'>후공</div>
+        <div id='div_textEnemy' class='st_textEnemy'>Enemy</div>
+        <div id='div_textYou' class='st_textYou'>You</div>
+        <div id='div_enemyHp' class='st_enemyHp'>15</div>
+        <div id='div_myHp' class='st_myHp'>15</div>
+        <div id='div_enemyHeart' class='st_enemyHeart'><img class='img' src='/image/heart.png'></div>
+        <div id='div_myHeart' class='st_myHeart'><img class='img' src='/image/heart.png'></div>
+        </center>
+      </div>
+      <div id='div_useLayer' class='st_mainLayer'>
+          <div id='div_useText' class='st_useText'><p class='st_txtCenter'>아이템을 사용하시려면 클릭해주세요<p></div>
+          <div id='div_useCount1' class='st_useCount1'>
+            <p class='st_txtCenter' id='txt_useCount1'>10</p>
+          </div>
+          <div id='div_useCount2' class='st_useCount2'>
+            <p class='st_txtCenter' id='txt_useCount2'>10</p>
+          </div>
+          <div id='div_useView' class='st_itemView'><img id='img_useView' class='img' src='/image/blank.png'></div>
+          <div id='div_useSelect1' class='st_itemSelect2'><img id='img_useSelect1' class='img' src='/image/blank.png'></div>
+          <div id='div_useSelect2' class='st_itemSelect3'><img id='img_useSelect2' class='img' src='/image/blank.png'></div>
+
+          <div id='div_useChoise'class='st_itemChoise'><img class='img' src='/image/item_use.png'></div>
+          <div id='div_useCancel'class='st_itemCancel'><img class='img' src='/image/item_cancel.png'></div>
+      </div>
+      <div id='div_reset' class='st_reset'><center>덱 초기화</center></div>
+      <div id='div_gameLayer' class='st_mainLayer'>
+        <center>
+        <div id='div_enemyNum' class='st_enemyNum'><img class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_enemyEquip' class='st_enemyEquip'><img id='img_enemyEquip'class='img' src='/image/blank.png'></div>
+        <div id='div_enemyItem' class='st_enemyItem'><img id='img_enemyItem'class='img' src='/image/item_logo_what.png'></div>
+        <div id='div_myNum' class='st_myNum'><img id='img_myNum'class='img' src='/image/card_back(755x1057).png'></div>
+        <div id='div_myEquip' class='st_myEquip'><img id='img_myEquip'class='img' src='/image/blank.png'></div>
+        <div id='div_myItem' class='st_myItem'><img id='img_myItem'class='img' src='/image/item_logo_what.png'></div>
+        <div id='div_announcer' class='st_announcer'>장착할 장비를 선택해주세요</div>
+        <div id='div_announcer2' class='st_announcer2'>상대가 아이템을 장착했습니다</div>
+        <div id='div_center' class='st_center'><img id='img_center' class='img' src='/image/blank.png'></div>
+        <div id='div_sword' class='st_sword'><img class='img' src='/image/card_front_sword(755x1057).png'></div>
+        <div id='div_shield' class='st_shield'><img class='img' src='/image/card_front_shield(755X1057).png'></div>
+        <div id='div_swordNum' class='st_swordNum'>x 6</div>
+        <div id='div_shieldNum' class='st_shieldNum'>x 6</div>
+        <div id='div_have1' class='st_have1'><img class='img' src='/image/card_front_1.png'></div>
+        <div id='div_have2' class='st_have2'><img class='img' src='/image/card_front_2.png'></div>
+        <div id='div_have3' class='st_have3'><img class='img' src='/image/card_front_3.png'></div>
+        <div id='div_have4' class='st_have4'><img class='img' src='/image/card_front_4.png'></div>
+        <div id='div_draw' class='st_draw'><img id='img_draw' class='img' src='/image/blank.png'></div>
+        <div id='div_plus' class='st_plus'>+</div>
+        </center>
+      </div>
+      <div id='div_roundCompleteLayer' calss='st_mainLayer'>
+        <center>
+        <div id='div_resEnemyNum' class='st_resEnemyNum'><img class='img' id='img_resEnemyNum' src='/image/blank.png'></div>
+        <div id='div_resEnemyEquip' class='st_resEnemyEquip'><img class='img' id='img_resEnemyEquip' src='/image/blank.png'></div>
+        <div id='div_resEnemyItem' class='st_resEnemyItem'><img class='img' id='img_resEnemyItem' src='/image/blank.png'></div>
+        <div id='div_resMyNum' class='st_resMyNum'><img class='img' id='img_resMyNum' src='/image/blank.png'></div>
+        <div id='div_resMyEquip' class='st_resMyEquip'><img class='img' id='img_resMyEquip' src='/image/blank.png'></div>
+        <div id='div_resMyItem' class='st_resMyItem'><img class='img' id='img_resMyItem' src='/image/blank.png'></div>
+        <div id='div_resAnnouncer' class='st_resAnnouncer'>VS</div>
+        <div id='div_resEnemyDown' class='st_resEnemyDown'></div>
+        <div id='div_resMyDown' class='st_resMyDown'></div>
+        <div id='div_resEnemyHeart' class='st_resEnemyHeart'><img class='img' src='/image/heart.png'></div>
+        <div id='div_resMyHeart' class='st_resMyHeart'><img class='img' src='/image/heart.png'></div>
+      </center>
+      </div>
+      <div id='div_resultLayer' class='st_mainLayer'>
+        <img class='img' id='img_result' src='/image/blank.png'>
+      </div>
+    </div>
+  </body>
+
+  <script>
+
+    var socket=io();
+    fontSize();
+    init();
+
+    var sword = 6;
+    var shield = 6;
+    var myHp=15;
+    var enemyHp=15;
+    var have=[true,true,true,true];
+    var itemClick;
+    var itemClickSave;
+    var itemSelected=[];
+    var itemCount=0;
+    var myTime;
+    var myFont;
+    var useItem;
+
+    socket.on('someone disconnect',function(isPlaying){
+      if(isPlaying){
+        $('#div_gameLayer').hide();
+        $('#div_resultLayer').show();
+        $('#img_result').attr('src','/image/victory.png');
+      }
+      setTimeout(function(){
+        location.reload();
+      },(isPlaying==true?2500:0));
+    });
+
+    socket.on('response : cannot access',function(){
+      $('#div_frontLayer').hide();
+      alert('접속이 차단되었습니다.\n사유 : 인원초과');
+      document.write('접속이 차단되었습니다.\n사유 : 인원초과');
+      window.close();
+    });
+
+    $('#div_playButton').click(function(){
+      $('#div_frontLayer').hide();
+      socket.emit('request : searching');
+    });
+
+    socket.on('response : please wait (searching)',function(){
+      $('#div_wait').show();
+    });
+
+    socket.on('response : please select item',function(){
+      $('#div_wait').hide();
+      $('#div_itemSelectLayer').show();
+    });
+
+    $('#div_itemSelect1').click(function(){
+      hideItemSelect();
+      showItemConfirm();
+      itemClickSave=itemClick;
+      itemClick=1;
+      $('#img_itemView').attr('src','/image/item_heal.png');
+    });
+    $('#div_itemSelect2').click(function(){
+      hideItemSelect();
+      showItemConfirm();
+      itemClickSave=itemClick;
+      itemClick=2;
+      $('#img_itemView').attr('src','/image/item_plus.png');
+    });
+    $('#div_itemSelect3').click(function(){
+      hideItemSelect();
+      showItemConfirm();
+      itemClickSave=itemClick;
+      itemClick=3;
+      $('#img_itemView').attr('src','/image/item_minus.png');
+    });
+    $('#div_itemCancel').click(function(){
+      hideItemConfirm();
+      showItemSelect();
+      $('#img_itemView').attr('src','/image/item_select.png');
+    });
+    $('#div_itemChoise').click(function(){
+      $('.st_itemSelect'+itemClick).css('cursor','default');
+      $('.st_itemSelect'+itemClick).css('border','3px solid red');
+      $('#div_itemSelect'+itemClick).unbind('click');
+      hideItemConfirm();
+      showItemSelect();
+      $('#img_itemView').attr('src','/image/item_select.png');
+      itemSelected[++itemCount]=(itemClick==1?'heal':(itemClick==2?'plus':'minus'));
+      if(itemCount==2){
+        socket.emit('request : item selecting complete',itemSelected);
+        for(var j=1;j<=3;j++){
+          $('#div_itemSelect'+j).unbind('click');
+        }
+      }
+      $('#div_useChoise').hide();
+      $('#div_useCancel').hide();
+      $('#img_useSelect1').attr('src','/image/item_logo_'+itemSelected[1]+'.png');
+      $('#img_useSelect2').attr('src','/image/item_logo_'+itemSelected[2]+'.png');
+    });
+
+    socket.on('response : please wait (item)',function(){
+      $('#img_itemView').attr('src','/image/item_wait.png');
+    });
+
+    socket.on('response : please select card',function(){
+      for(var i=1;i<=4;i++){
+        $('.st_itemSelect'+i).css('cursor','pointer');
+        $('.st_itemSelect'+i).css('border','0px');
+      }
+      $('#div_itemSelectLayer').hide();
+      $('#div_selectLayer').show();
+    });
+
+    for(var i=1;i<=4;i++)
+      func1(i);
+    function func1(i){
+      $('#div_select'+i).click(function(){
+        socket.emit('request : select card',i);
+      });
+    }
+
+    socket.on('response : wait enemy selecting',function(num,card){
+      $('#img_selected'+num).attr('src','/image/card_front_'+card+'.png');
+      for(var i=1;i<=4;i++){
+        $('#div_select'+i).hide();
+        $('#div_selected'+i).show();
+        $('.st_select'+i).css('cursor','default');
+      }
+      var x=9+((num-1)*25);
+      $('#div_mySelect').css('left',''+x+'%');
+      $('#div_mySelect').show();
+    });
+
+    socket.on('response : enemy selected',function(num,card){
+      $('#img_selected'+num).attr('src','/image/card_front_'+card+'.png');
+      $('#div_select'+num).hide();
+      $('#div_selected'+num).show();
+      var x=9+((num-1)*25);
+      $('#div_enemySelect').css('left',''+x+'%');
+      $('#div_enemySelect').show();
+    });
+
+    socket.on('response : selecting complete',function(isWin){
+      if(isWin){
+        $('#div_selectText').hide();
+        $('#div_offense').show();
+        $('#div_defense').show();
+      }
+      else{
+        $('#img_selectText').attr('src','/image/enemy_is_selecting.png');
+      }
+    });
+
+    $('#div_offense').click(function(){
+      socket.emit('request : offense defense selecting',true);
+    });
+
+    $('#div_defense').click(function(){
+      socket.emit('request : offense defense selecting',false);
+    });
+
+    socket.on('response : please use item',function(round,turn,isReset){
+
+      $('#div_round').show();
+      $('#div_offdef').show();
+      $('#div_announcer2').hide();
+      if(isReset){
+        $('#div_reset').show();
+        $('#div_statusLayer').hide();
+      }
+      setTimeout(function(){
+        if(isReset) {
+          $('#div_reset').hide();
+        }
+        $('#div_statusLayer').show();
+        $('#div_round').text(round+'R');
+        $('#div_offdef').text((turn==true?'선공':'후공'));
+
+        $('#div_useLayer').show();
+        $('#img_useView').attr('src','/image/blank.png');
+        $('#div_useCount2').hide();
+        $('#div_useSelect1').show();
+        $('#div_useSelect2').show();
+        $('#div_selectLayer').hide();
+
+        socket.emit('request : timer','use');
+      },(isReset==true?2500:0));
+    });
+
+    $('#div_useSelect1').click(function(){
+      $('#img_useView').attr('src','/image/item_'+itemSelected[1]+'.png');
+      $('#div_useSelect1').hide();
+      $('#div_useSelect2').hide();
+      $('#div_useChoise').show();
+      $('#div_useCancel').show();
+      $('#div_useCount2').show();
+      useItem=1;
+    });
+
+    $('#div_useSelect2').click(function(){
+      $('#img_useView').attr('src','/image/item_'+itemSelected[2]+'.png');
+      $('#div_useSelect1').hide();
+      $('#div_useSelect2').hide();
+      $('#div_useChoise').show();
+      $('#div_useCancel').show();
+      $('#div_useCount2').show();
+      useItem=2;
+    });
+
+    $('#div_useChoise').click(function(){
+      socket.emit('request : user use item',useItem);
+      $('#div_useCancel').hide();
+      $('#div_useChoise').hide();
+    });
+
+    $('#div_useCancel').click(function(){
+      $('#div_useCancel').hide();
+      $('#div_useChoise').hide();
+      $('#div_useSelect1').show();
+      $('#div_useSelect2').show();
+      $('#div_useCount2').hide();
+      $('#img_useView').attr('src','/image/blank.png');
+    });
+
+    socket.on('response : timer',function(time,font){
+      $('#'+font+'1').text(''+time);
+      $('#'+font+'2').text(''+time);
+    });
+
+    socket.on('response : you use item',function(itemNum){
+      $('#div_useSelect'+itemNum).remove();
+      $('#img_myItem').attr('src','/image/item_logo_'+itemSelected[itemNum]+'.png');
+      $('#div_myItem').show();
+    });
+
+    socket.on('response : enemy use item',function(){
+      $('#img_enemyItem').attr('src','/image/item_logo_what.png');
+      $('#div_enemyItem').show();
+      $('#div_announcer2').show();
+    });
+
+    socket.on('start game',function(drawCard,isReset){
+      $('#txt_useCount1').text('10');
+      $('#txt_useCount2').text('10');
+      $('#div_useLayer').hide();
+      $('#div_gameLayer').show();
+      $('#div_draw').show();
+      $('#div_announcer').text('사용할 숫자 카드를 선택해주세요');
+      $('#img_center').attr('src','/image/blank.png');
+      $('#img_draw').attr('src','/image/card_front_'+drawCard+'.png');
+      pointerNum();
+      defaultEquip();
+      numClickAdd();
+      for(var i=0;i<4;i++){
+        if(have[i])
+          $('#div_have'+(i+1)).show();
+      }
+    });
+
+    socket.on('response : hide num',function(isDraw,num){
+      if(isDraw) $('#div_draw').hide();
+      else {
+        $('#div_have'+num).hide();
+        have[num-1]=false;
+      }
+    });
+
+    socket.on('response : please wait enemy choosing',function(){
+      $('#div_announcer').text('상대가 숫자를 고르는 중입니다');
+    });
+
+    socket.on('response : disable num',function(){
+      defaultNum();
+      numClickRemove();
+    });
+
+    socket.on('response : show center',function(num){
+      $('#img_center').attr('src','/image/card_front_'+num+'.png');
+    });
+
+    socket.on('response : enemy choose num',function(){
+      $('#div_enemyNum').show();
+    });
+
+    socket.on('response : show your num',function(num){
+      $('#div_myNum').show();
+      $('#img_myNum').attr('src','/image/card_front_'+num+'.png');
+    });
+
+    socket.on('response : choose equip',function(turn){
+      if(turn){
+        $('#div_announcer').text('사용할 장비 카드를 선택해주세요');
+        pointerEquip();
+        equipClickAdd();
+      }
+      else{
+        $('#div_announcer').text('상대가 장비를 고르는 중입니다');
+      }
+    });
+
+    socket.on('response : disable equip',function(){
+      equipClickRemove();
+    });
+
+    socket.on('response : show your equip',function(isSword){
+      var url='/image/'+(isSword==true?'card_front_sword(755x1057).png':'card_front_shield(755X1057).png');
+      $('#div_myEquip').show();
+      $('#img_myEquip').attr('src',url);
+    });
+
+    socket.on('response : show enemy equip',function(isSword){
+      var url='/image/'+(isSword==true?'card_front_sword(755x1057).png':'card_front_shield(755X1057).png');
+      $('#div_enemyEquip').show();
+      $('#img_enemyEquip').attr('src',url);
+    });
+
+    socket.on('response : show result',function(myNum,myEquip,myItem,enemyNum,enemyEquip,enemyItem){
+      $('#div_gameLayer').hide();
+      $('#div_roundCompleteLayer').show();
+      hideTop();
+      $('#div_resAnnouncer').text('VS');
+      $('#img_resMyNum').attr('src','/image/card_front_'+myNum+'.png');
+      $('#img_resEnemyNum').attr('src','/image/card_front_'+enemyNum+'.png');
+      $('#img_resMyEquip').attr('src','/image/card_front_'+(myEquip==true?'sword(755x1057)':'shield(755X1057)')+'.png');
+      $('#img_resEnemyEquip').attr('src','/image/card_front_'+(enemyEquip==true?'sword(755x1057)':'shield(755X1057)')+'.png');
+      $('#img_resMyItem').attr('src','/image/'+myItem+'.png');
+      $('#img_resEnemyItem').attr('src','/image/'+enemyItem+'.png');
+
+      $('#div_resMyDown').hide();
+      $('#div_resMyHeart').hide();
+      $('#div_resEnemyDown').hide();
+      $('#div_resEnemyHeart').hide();
+
+      if(myItem == 'item_logo_plus') myNum++;
+      if(enemyItem == 'item_logo_plus') enemyNum++;
+      if(myItem == 'item_logo_minus') enemyNum--;
+      if(enemyItem == 'item_logo_minus') myNum--;
+
+      setTimeout(function()
+      {
+        //누군가 힐 카드를 사용했을 경우
+        if(myItem == 'item_logo_heal' || enemyItem=='item_logo_heal'){
+          //둘 다 힐 카드를 사용했을 경우
+          if(myItem == 'item_logo_heal' && enemyItem=='item_logo_heal'){
+            showHealMy(myNum);
+            setTimeout(function(){
+              $('#div_resMyDown').hide();
+              $('#div_resMyHeart').hide();
+              showHealEnemy(enemyNum);
+            },2000);
+          }
+          //나만 힐 카드를 사용했을 경우
+          else if(myItem == 'item_logo_heal'){
+            if(enemyEquip){
+              showDecMy(enemyNum);
+            }
+            else{
+              showHealMy(myNum);
+            }
+          }
+          //적만 힐 카드를 사용했을 경우
+          else{
+            if(myEquip){
+              showDecEnemy(myNum);
+            }
+            else{
+              showHealEnemy(enemyNum);
+            }
+          }
+        }
+        //둘 중 아무도 힐 카드를 사용하지 않았을 경우
+        else{
+          //둘 다 검
+          if(myEquip&&enemyEquip){
+            if((myNum==1&&enemyNum==5) || (myNum==1&&enemyNum==4&&enemyItem!='item_logo_plus')){
+              showDecEnemy(5);
+            }
+            else if((myNum==5&&enemyNum==1) || (myNum==4&&myItem!='item_logo_plus'&&enemyNum==1)){
+              showDecMy(5);
+            }
+            else{
+              showDecEnemy(myNum);
+              setTimeout(function(){
+                $('#div_resEnemyDown').hide();
+                $('#div_resEnemyHeart').hide();
+                showDecMy(enemyNum);
+              },2000);
+            }
+          }
+          //나는 검, 상대는 방패
+          else if(myEquip&&(!enemyEquip)){
+            if((myNum==4&&enemyNum==1) || (myNum<=enemyNum)){
+              $('#div_resAnnouncer').text('아무일도 일어나지 않았습니다');
+            }
+            else{
+              showDecEnemy(myNum-enemyNum);
+            }
+          }
+          //나는 방패, 상대는 검
+          else if((!myEquip)&&enemyEquip){
+            if((myNum==1&&enemyNum==4)||(myNum>=enemyNum)){
+              $('#div_resAnnouncer').text('아무일도 일어나지 않았습니다');
+            }
+            else{
+              showDecMy(enemyNum-myNum);
+            }
+          }
+          //둘 다 방패
+          else{
+            $('#div_resAnnouncer').text('아무일도 일어나지 않았습니다');
+          }
+        }
+
+        setTimeout(function(){
+          $('#div_roundCompleteLayer').hide();
+          socket.emit('request : round complete');
+        },4000);
+      },2000);
+    });
+
+    socket.on('response : game over',function(type){
+      $('#div_round').hide();
+      $('#div_offdef').hide();
+      $('#div_gameLayer').hide();
+      $('#div_resultLayer').show();
+      $('#img_result').attr('src','/image/'+type+'.png');
+      setTimeout(function(){
+        location.reload();
+      },3000);
+    });
+
+
+
+
+
+
+    function init(){
+      $('#div_round').hide();
+      $('#div_offdef').hide();
+
+      $('#div_selectLayer').hide();
+      $('#div_wait').hide();
+      for(var i=1;i<=4;i++){
+        $('#div_selected'+i).hide();
+      }
+      $('#div_mySelect').hide();
+      $('#div_enemySelect').hide();
+      $('#div_offense').hide();
+      $('#div_defense').hide();
+      $('#div_reset').hide();
+
+      $('#div_gameLayer').hide();
+      $('#div_resultLayer').hide();
+      hideTop();
+
+      $('#div_itemSelectLayer').hide();
+
+      $('#div_itemChoise').hide();
+      $('#div_itemCancel').hide();
+
+      $('#div_useLayer').hide();
+      $('#div_useCount2').hide();
+      $('#div_statusLayer').hide();
+      $('#div_announcer2').hide();
+      $('#div_roundCompleteLayer').hide();
+    }
+
+    function hideItemSelect(){
+      for(var i=1;i<=4;i++){
+        $('#div_itemSelect'+i).hide();
+      }
+    }
+    function showItemSelect(){
+      for(var i=1;i<=4;i++){
+        $('#div_itemSelect'+i).show();
+      }
+    }
+    function showItemConfirm(){
+      $('#div_itemChoise').show();
+      $('#div_itemCancel').show();
+    }
+    function hideItemConfirm(){
+      $('#div_itemChoise').hide();
+      $('#div_itemCancel').hide();
+    }
+
+    function fontSize(){
+      $('.st_reset').css('font-size',$('.st_reset').height()*0.4);
+      $('.st_textEnemy').css('font-size',$('.st_textEnemy').width()*0.3);
+      $('.st_textYou').css('font-size',$('.st_textYou').width()*0.3);
+      $('.st_enemyHp').css('font-size',$('.st_enemyHp').width()*0.5);
+      $('.st_myHp').css('font-size',$('.st_myHp').width()*0.5);
+      $('.st_round').css('font-size',$('.st_round').width()*0.5);
+      $('.st_offdef').css('font-size',$('.st_offdef').width()*0.4);
+      $('.st_announcer').css('font-size',$('.st_announcer').height()*0.7);
+      $('.st_announcer2').css('font-size',$('.st_announcer2').height()*0.5);
+      $('.st_swordNum').css('font-size',$('.st_swordNum').height()*0.9);
+      $('.st_shieldNum').css('font-size',$('.st_shieldNum').height()*0.9);
+      $('.st_plus').css('font-size',$('.st_plus').height()*0.9);
+      $('.st_resAnnouncer').css('font-size',$('.st_resAnnouncer').height()*0.9);
+      $('.st_resEnemyDown').css('font-size',$('.st_resEnemyDown').width()*0.35);
+      $('.st_resMyDown').css('font-size',$('.st_resMyDown').width()*0.35);
+      $('.st_temp').css('font-size',$('.st_itemView').height()*0.5);
+      $('.st_useText').css('font-size',$('.st_useText').height()*0.7);
+      $('.st_useCount1').css('font-size',$('.st_useCount1').height()*0.6);
+      $('.st_useCount2').css('font-size',$('.st_useCount2').height()*0.9);
+    }
+
+    function pointerNum(){
+      $('.st_have1').css('cursor','pointer');
+      $('.st_have2').css('cursor','pointer');
+      $('.st_have3').css('cursor','pointer');
+      $('.st_have4').css('cursor','pointer');
+      $('.st_draw').css('cursor','pointer');
+    }
+
+    function defaultNum(){
+      $('.st_have1').css('cursor','default');
+      $('.st_have2').css('cursor','default');
+      $('.st_have3').css('cursor','default');
+      $('.st_have4').css('cursor','default');
+      $('.st_draw').css('cursor','default');
+    }
+
+    function pointerEquip(){
+      $('.st_sword').css('cursor','pointer');
+      $('.st_shield').css('cursor','pointer');
+    }
+
+    function defaultEquip(){
+      $('.st_sword').css('cursor','default');
+      $('.st_shield').css('cursor','default');
+    }
+
+    function hideTop(){
+      $('#div_enemyNum').hide();
+      $('#div_enemyEquip').hide();
+      $('#div_enemyItem').hide();
+      $('#div_myNum').hide();
+      $('#div_myEquip').hide();
+      $('#div_myItem').hide();
+    }
+
+    function numClickAdd(){
+      for(var i=1;i<=4;i++){
+        numClick_notDraw(i);
+      }
+      $('#div_draw').click(function(){
+        socket.emit('request : user choose number',true,100);
+      });
+    }
+    function numClick_notDraw(i){
+      $('#div_have'+i).click(function(){
+        socket.emit('request : user choose number',false,i);
+      });
+    }
+
+    function numClickRemove(){
+      for(var i=1;i<=4;i++){
+        $('#div_have'+i).unbind('click');
+      }
+      $('#div_draw').unbind('click');
+    }
+
+    function equipClickAdd(){
+      if(sword>=1){
+        $('#div_sword').click(function(){
+          socket.emit('request : user choose equip',true);
+          sword--;
+          $('#div_swordNum').text('x '+sword);
+          defaultEquip();
+        });
+      }
+      if(shield>=1){
+        $('#div_shield').click(function(){
+          socket.emit('request : user choose equip',false);
+          shield--;
+          $('#div_shieldNum').text('x '+shield);
+          defaultEquip();
+        });
+      }
+    }
+
+    function equipClickRemove(){
+      $('#div_sword').unbind('click');
+      $('#div_shield').unbind('click');
+    }
+
+    function showDecEnemy(x){
+      $('#div_resEnemyDown').show();
+      $('#div_resEnemyHeart').show();
+      $('#div_resEnemyDown').text('-'+x);
+      enemyHp-=x;
+      $('#div_enemyHp').text(''+enemyHp);
+      $('#div_resAnnouncer').text('상대에게 '+x+'의 피해를 가했습니다');
+    }
+    function showDecMy(x){
+      $('#div_resMyDown').show();
+      $('#div_resMyHeart').show();
+      $('#div_resMyDown').text('-'+x);
+      myHp-=x;
+      $('#div_myHp').text(''+myHp);
+      $('#div_resAnnouncer').text('내 체력이 '+x+'만큼 떨어졌습니다');
+      socket.emit('request : hp down',x);
+    }
+
+    function showHealMy(x){
+      $('#div_resMyDown').show();
+      $('#div_resMyHeart').show();
+      $('#div_resMyDown').text('+'+x);
+      myHp+=x;
+      $('#div_myHp').text(''+myHp);
+      $('#div_resAnnouncer').text('내 체력이 '+x+'만큼 회복됐습니다');
+      socket.emit('request : hp down',(-x));
+    }
+    function showHealEnemy(x){
+      $('#div_resEnemyDown').show();
+      $('#div_resEnemyHeart').show();
+      $('#div_resEnemyDown').text('+'+x);
+      enemyHp+=x;
+      $('#div_enemyHp').text(''+enemyHp);
+      $('#div_resAnnouncer').text('상대의 체력이 '+x+'만큼 회복됐습니다');
+    }
+  </script>
+</html>
